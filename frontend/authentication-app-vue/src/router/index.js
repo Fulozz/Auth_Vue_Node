@@ -1,4 +1,3 @@
-import nProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
 
 //==> importacoes das paginas
