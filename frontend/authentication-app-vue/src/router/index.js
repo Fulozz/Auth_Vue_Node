@@ -1,3 +1,4 @@
+import nProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
 
 //==> importacoes das paginas
@@ -23,9 +24,10 @@ const routes = [
   }
 ]
 
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
 export default router
