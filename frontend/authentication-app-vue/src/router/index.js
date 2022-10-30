@@ -8,13 +8,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: ()=> import("@/components/authComponents/home/HomeComponent")
-  },
-  {
-    path: '/login',
     name: 'login',
     component: ()=> import("@/components/authComponents/login/LoginComponent")
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: ()=> import("@/components/authComponents/home/HomeComponent")
   },
   {
     path: '/register',

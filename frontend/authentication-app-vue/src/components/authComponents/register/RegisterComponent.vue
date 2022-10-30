@@ -4,7 +4,7 @@
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
         <form 
         class="text-center border border-primary p-5"
-        v-on:submit.prevent="registerSubmitUserForm()"
+        v-on:submit="registerSubmitUserForm()"
         >
         <!-- Inicio do bloco: Nome -->
         <input 
@@ -13,7 +13,8 @@
         name="name"
         class="form-control mb-5"
         placeholder="Inclua seu nome completo"
-        v-model="registerForm.name"
+        v-model="state.name"
+        required
         />
         <!-- Fim do bloco: Nome -->  
         <!-- Inicio do bloco: Email -->
@@ -22,9 +23,15 @@
         id="email"
         name="email"
         class="form-control mb-5"
-        placeholder="Inclua seu nome completo"
-        v-model="registerForm.email"
-        />
+        placeholder="Coloque seu E-mail"
+        v-model="state.email"
+
+        required
+         />
+         <span v-if="v$.email.$error">
+          {{ v$.email.$errors[0].$message }}
+        </span>
+        
         <!-- Fim do bloco: Email -->    
         <!-- Inicio do bloco: Password -->
         <input 
@@ -33,14 +40,33 @@
         name="password"
         class="form-control mb-5"
         placeholder="Inclua sua senha"
-        v-model="registerForm.password"
+        v-model="state.password.password"
         />
-        <!-- Fim do bloco: Email -->  
+        <span v-if="v$.password.$error">
+          {{ v$.password.$errors[0].$message }}
+        </span>
+        <!-- Fim do bloco: Password -->  
+        <!-- Inicio do bloco: Confirm Password -->
+        <input 
+        type="password"
+        id="password"
+        name="password"
+        class="form-control mb-5"
+        placeholder="Confirme sua senha"
+        v-model="state.password.confirm"
+        required
+        />
+        <span v-if="v$.password.confirm.$error">
+          <p>{{ v$.password.confirm.$errors[0].$message }}</p>
+        </span>
+        <!-- Fim do bloco: Password -->
         <p class="center">Já tem um conta cadastrada? <router-link to="/login">Faça login</router-link></p>
         <!-- Inicio do bloco: Botao-->
         <Center>
-          <button @click="submitRegisterUser" 
-          class="btn btn-primary w-75 my-4">
+          <button @click="registerLoginUser()" 
+          class="btn btn-primary w-75 my-4"
+          id="btn"
+          >
             Cadastrar
           </button>
         </Center>
@@ -52,40 +78,50 @@
 </template>
 
 <script>
-import { useVuelidate } from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import  useValidate  from '@vuelidate/core'
+import { required, email, minLength, sameAs } from '@vuelidate/validators'
+import { reactive, computed} from 'vue'
 
 export default {
   name: 'RegisterComponent',
-  data() {
-    return {
-      v$: useVuelidate(),
-      registerForm:{
-        name: null,
-        email: null,
-        password: null
-      }
-    };
-  },
-  validations(){
-    return {
-      v$: useVuelidate(),
-      registerForm:{
-        name: {required},
-        email: {required},
-        password: {required}
-      }
-    };
-  },
-  methods: {
-    registerSubmitUserForm(){
+setup(){ 
+  const state = reactive({
+    name: '',
+    email: '',
+    password:{  
+      password: '',
+      confirm: '',
+    },
+  });
 
-    },
-    async submitRegisterUser(){
-      alert('Conta criada com sucesso')
-    },
+const rules = computed(()=>{ // Validations 
+  return{
+    name: { required },
+    email: { required, email },
+    password:{  
+      password: { required, minLength: minLength(6) },
+      confirm: { required, sameAs: sameAs(state.password.password) },
+      }
+    }
+  })
+  const v$ = useValidate(rules, state)
+  return{
+    state,
+    v$
   }
-};
+},   
+  methods: {
+    registerLoginUser(){
+      this.v$.$validate()
+      if(!this.v$.$error){
+        alert("Seja bem-vindo(a)!")
+      } else {
+        alert("Tem algo errado")
+      }
+    },
+    registerSubmitUserForm(){}
+  } 
+}
 </script>
 
 <style scoped>
