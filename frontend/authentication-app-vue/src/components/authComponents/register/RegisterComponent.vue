@@ -52,13 +52,28 @@
 </template>
 
 <script>
-    export default {
+import { useVuelidate } from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
+
+export default {
   name: 'RegisterComponent',
   data() {
     return {
+      v$: useVuelidate(),
       registerForm:{
         name: null,
         email: null,
+        password: null
+      }
+    };
+  },
+  validations(){
+    return {
+      v$: useVuelidate(),
+      registerForm:{
+        name: {required},
+        email: {required},
+        password: {required}
       }
     };
   },
@@ -67,7 +82,7 @@
 
     },
     async submitRegisterUser(){
-
+      alert('Conta criada com sucesso')
     },
   }
 };
