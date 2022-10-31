@@ -1,11 +1,16 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import Vuelidate from 'vuelidate';
 
+import App from './App.vue';
+import router from './router';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/nprogress/nprogress.css';
 
-import 'bootstrap';
-import "bootstrap/dist/css/bootstrap.min.css";
+Vue.use(Vuelidate);
 
+Vue.config.productionTip = false;
 
-createApp(App).use(router).mount('#app')
-// TeSTE
+new Vue({
+  router,
+  render: (h) => h(App),
+}).$mount('#app');
