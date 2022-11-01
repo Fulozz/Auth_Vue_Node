@@ -1,0 +1,3 @@
+Arquivos responsaveis pela autenticação dos dados para login de usuarios,
+e registro de novos Users.
+

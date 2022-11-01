@@ -1,27 +1,32 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import HomeComponent from '../components/auth-components/home/HomeComponent.vue';
+import LoginComponent from '../components/auth-components/login/LoginComponent.vue';
+import RegisterComponent from '../components/auth-components/register/RegisterComponent.vue';
 
-//= => importacoes das paginas
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'login',
-    component: () => import('@/components/authComponents/login/LoginComponent.vue'),
+    name: 'home',
+    component: HomeComponent,
   },
   {
-    path: '/home',
-    name: 'home',
-    component: () => import('@/components/authComponents/home/HomeComponent.vue'),
+    path: '/login',
+    name: 'login',
+    component: LoginComponent,
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('@/components/authComponents/register/RegisterComponent.vue'),
+    component: RegisterComponent,
   },
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes,
 });
 

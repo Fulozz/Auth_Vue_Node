@@ -1,12 +1,8 @@
 import Vue from 'vue';
-import Vuelidate from 'vuelidate';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.vue';
 import router from './router';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/nprogress/nprogress.css';
-
-Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 
