@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import HomeComponent from '@/components/auth-components/home/HomeComponent.vue'
+import HomeComponent from '@/components/auth-components/home/HomeComponent.vue';
 
 export default {
-    components:{
-        HomeComponent
-    }
-}
+  components: {
+    HomeComponent,
+  },
+};
 </script>

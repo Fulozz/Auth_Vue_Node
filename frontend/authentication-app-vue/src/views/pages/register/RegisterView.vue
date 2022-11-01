@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import RegisterComponent from '@/components/auth-components/register/RegisterComponent.vue'
+import RegisterComponent from '@/components/auth-components/register/RegisterComponent.vue';
 
 export default {
-    components: {
-        RegisterComponent,
-    },
-}
+  components: {
+    RegisterComponent,
+  },
+};
 </script>
